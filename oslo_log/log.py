@@ -354,7 +354,6 @@ def _setup_logging_from_conf(conf, project, version):
     # Remove all handlers
     for handler in list(log_root.handlers):
         log_root.removeHandler(handler)
-    import pdb; pdb.set_trace()
     logpath = _get_log_file_path(conf)
     if logpath:
         # On Windows, in-use files cannot be moved or deleted.
