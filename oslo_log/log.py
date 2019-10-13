@@ -71,6 +71,8 @@ LOG_ROTATE_INTERVAL_MAPPING = {
     'midnight': 'midnight'
 }
 
+CONF = cfg.CONF
+
 
 def _get_log_file_path(conf, binary=None):
     logfile = conf.log_file
