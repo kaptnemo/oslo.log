@@ -140,7 +140,10 @@ generic_log_opts = [
                          'Rotate logs once they reach a predefined size.'),
                         ('none', 'Do not rotate log files.')],
                ignore_case=True,
-               help='Log rotation type.')
+               help='Log rotation type.'),
+     cfg.StrOpt('logfile_mode',
+               default='0644',
+               help='Default file mode used when creating log files')
 ]
 
 log_opts = [

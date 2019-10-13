@@ -32,6 +32,7 @@ import logging.config
 import logging.handlers
 import os
 import platform
+import stat
 import sys
 try:
     import syslog
@@ -351,7 +352,7 @@ def _setup_logging_from_conf(conf, project, version):
     # Remove all handlers
     for handler in list(log_root.handlers):
         log_root.removeHandler(handler)
-
+    import pdb; pdb.set_trace()
     logpath = _get_log_file_path(conf)
     if logpath:
         # On Windows, in-use files cannot be moved or deleted.
@@ -380,6 +381,11 @@ def _setup_logging_from_conf(conf, project, version):
         else:
             file_handler = logging.handlers.WatchedFileHandler
             filelog = file_handler(logpath)
+        
+        mode = int(CONF.logfile_mode, 8)
+        st = os.stat(logpath)
+        if st.st_mode != (stat.S_IFREG | mode):
+            os.chmod(logpath, mode)
 
         log_root.addHandler(filelog)
 
